@@ -1,0 +1,14 @@
+There is no First Name in row 4
+There is no Last Name in row 4
+There is no Street in row 4 and Street is a required field
+There is no Zip in row 4 and Zip is a required field
+There is no City in row 4 and City is a required field
+There is no Type in row 4
+There is no Last Check-In Date in row 4 and Last Check-In Date is a required field
+There is no Job in row 4
+There is no Phone in row 4
+There is no Company in row 4 and Company is a required field
+Row 4 is totally empty
+There is no Last Check-In Date in row 8 and Last Check-In Date is a required field
+There is no Zip in row 9 and Zip is a required field
+There is no Street in row 10 and Street is a required field
