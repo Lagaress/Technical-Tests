@@ -3,9 +3,11 @@ const config = require('./config.json')
 const connection = mysql.createConnection({
     host: config.host,
     user: config.user,
-    password: config.password
+    password: config.password,
+    database: config.database,
+    port: config.port
 });
-
+/* TO-DO: REAJUSTAR O VER QUÉ HACER CON ESTE CÓDIGO
 function connectDatabase()
 {
     connection.connect(function(err) 
@@ -17,6 +19,7 @@ function connectDatabase()
         }
         catch
         {
+            console.log(err)
             console.log("Some error have ocurred trying to establish a connection with database, please check the log file")
         }
         
@@ -63,10 +66,10 @@ function createNominationTable()
         console.log("Table created successfully")
     })
 }
-
+*/
 module.exports =
 {
-
-    connectDatabase,
-    closeDatabase
+    connection
+    //connectDatabase,
+    //closeDatabase
 }

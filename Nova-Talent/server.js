@@ -19,7 +19,6 @@ function manageURLs(req , res)
 
     else if (req.url == '/nominations-list' && req.method == 'GET')
     {
-        res.end("Here is where you're going to see all nominations") 
         showNominationList(req , res)
     }
 

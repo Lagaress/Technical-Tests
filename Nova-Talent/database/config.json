@@ -1,5 +1,8 @@
 {
     "host": "localhost",
     "user": "localhost",
-    "password": "root"
+    "password": "root",
+    "database": "nova",
+    "port": 3306
+ 
 }
