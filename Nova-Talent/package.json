@@ -1,0 +1,13 @@
+{
+  "name": "nova-talent-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Jesús Lagares",
+  "license": "ISC"
+}
