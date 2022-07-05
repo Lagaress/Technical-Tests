@@ -1,10 +1,18 @@
-const { callbackify } = require('util')
-const {connection} = require('../database/connection')
+const {connection} = require('../data/database/connection')
 
-function addNominationToDb()
+function addNominationToDb(nominationToAdd)
 {
+    return new Promise((resolve , reject) =>
+    {
+      // insertQuery = 'INSERT INTO nominations (userWhoNominate,email,explanation,involvement,overall,accepted) VALUES ('nominationToAdd.getUserWhoNominate(),nominationToAdd.getemailToNominate(),nominationToAdd.getExplanation(),nominationToAdd.getInvolvement(),nominationToAdd.getOverall()')'
 
-}
+        connection.query(insertQuery, function(err, result)
+        {
+            if (err) throw err 
+            resolve("Nomination added succesfully")
+        })
+    })
+} 
 
 function getNominationsNonRejected()
 {

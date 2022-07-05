@@ -1,12 +1,14 @@
 class Nomination
 {
-    constructor(userWhoNominate,emailToNominate,explanation,involvement,overall)
+
+    constructor(userWhoNominate,emailToNominate,explanation,involvement,overall )
     {
         this.userWhoNominate = userWhoNominate 
         this.emailToNominate = emailToNominate 
         this.explanation = explanation
         this.involvement = involvement
-        this.overall = this.isRejectedAutomatically(overall)
+        this.overall = overall
+        this.accepted = this.isRejectedAutomatically(overall)
     }
 
     getUserWhoNominate()
@@ -31,12 +33,17 @@ class Nomination
     
     getOverall()
     {
-        return this.getOverall
+        return this.overall
     }
 
+    getAccepted()
+    {
+        return this.accepted
+    }
+    
     isRejectedAutomatically(overall)
     {
-        return (overall <= 8)
+        return (overall >= 8)
     }
 }   
 
