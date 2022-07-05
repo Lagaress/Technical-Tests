@@ -1,7 +1,9 @@
+const {sendMail} = require('./mailing/mailing')
+
 class Nomination
 {
 
-    constructor(userWhoNominate,emailToNominate,explanation,involvement,overall )
+    constructor(userWhoNominate,emailToNominate,explanation,involvement,overall)
     {
         this.userWhoNominate = userWhoNominate 
         this.emailToNominate = emailToNominate 
@@ -44,7 +46,9 @@ class Nomination
     isRejectedAutomatically(overall)
     {
         return (overall >= 8)
+        sendMail(this.getUserWhoNominate() , this.getemailToNominate())
     }
+
 }   
 
 module.exports = 
