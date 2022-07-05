@@ -1,9 +1,8 @@
-const {connection} = require('../data/database/connection')
+const {connection, createDatabase, closeDatabase} = require('../data/database/connection')
 const NominationClass = require('../data/Nomination')
 
-function addNominationToDb(nominationToAdd)
+async function addNominationToDb(nominationToAdd)
 {
-
     const userWhoNominate = nominationToAdd.getUserWhoNominate()
     const userToNominate = nominationToAdd.getemailToNominate()
     const explanation = nominationToAdd.getExplanation()
@@ -14,24 +13,52 @@ function addNominationToDb(nominationToAdd)
     var regularExpresion = /%20/gi
     parserExplanation = explanation.replace(regularExpresion,' ')
 
-    insertQuery = `INSERT INTO nominations (userWhoNominate,email,explanation,involvement,overall,accepted) VALUES ("${userWhoNominate}","${userToNominate}","${parserExplanation}",${involvement},${overall},${accepted})`
+    var isNominated = await isNominatedEmailInBD(userToNominate)
 
-    console.log(insertQuery)
+    if ( isNominated != 0 )
+    {
+        return new Promise((resolve , reject) =>
+        {
+            resolve(false)
+        })
+    }
+    else
+    {
+        insertQuery = `INSERT INTO nominations (userWhoNominate,email,explanation,involvement,overall,accepted) VALUES ("${userWhoNominate}","${userToNominate}","${parserExplanation}",${involvement},${overall},${accepted})`
+    
+        return new Promise((resolve , reject) =>
+        {
+    
+            connection.query(insertQuery, function(err, result)
+            {
+                if (err) throw err 
+                resolve(true)
+            })
+        })
+    }  
+} 
 
+function isNominatedEmailInBD(userToNominate)
+{
+    searchNominatedEmailQuery = `SELECT * from nominations WHERE email ="${userToNominate}" `
     return new Promise((resolve , reject) =>
     {
 
-        connection.query(insertQuery, function(err, result)
+        connection.query(searchNominatedEmailQuery, function(err, result)
         {
             if (err) throw err 
-            resolve("Nomination added succesfully")
+            resolve( result.length )
         })
     })
-    
-} 
+
+
+ 
+
+}
 
 function getNominationsNonRejected()
 {
+    
     return new Promise((resolve , reject) =>
     {
         connection.query("SELECT * from nominations WHERE accepted = 1", function(err, result)
@@ -40,6 +67,8 @@ function getNominationsNonRejected()
             resolve(result)
         })
     })
+
+    
 }
 
 module.exports = 

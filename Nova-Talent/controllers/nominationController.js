@@ -4,9 +4,16 @@ async function addNomination(res, Nomination)
 {
     try
     {
-        await NominationModel.addNominationToDb(Nomination)
+        var flag = await NominationModel.addNominationToDb(Nomination)
         res.writeHead(201 , {'Content-Type': 'application/json'})
-        res.write("Nomination added successfully");
+        if (flag)
+        {
+            res.write("Nomination added successfully");
+        }
+        else
+        {
+            res.write("The user that you're trying to add is already on database");
+        }
         res.end()
     }
     catch (err)

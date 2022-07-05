@@ -5,7 +5,7 @@ const NominationClass = require('./data/Nomination')
 
 const server = http.createServer(function(req, res) {
     res.writeHead(200, { "Content-type": "text/plain" })
-    manageURLs(req , res) ;
+    manageURLs(req, res)
 })
 
 server.listen(8000, function() {
@@ -14,7 +14,7 @@ server.listen(8000, function() {
 
 function manageURLs(req , res)
 {
-
+    // Añadir casos para la distinción del post porque da error
     if (req.url.match(/\/nominate\/[A-Z]|[a-z]|[@.,*`^]\/[A-Z]|[a-z]|[@.,*`^]\/[A-Z]|[a-z]\/[1-10]\/[1-10]/) && req.method == 'POST')
     {
 

@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
     database: config.database,
     port: config.port
 });
-/* TO-DO: REAJUSTAR O VER QUÉ HACER CON ESTE CÓDIGO
+/*
 function connectDatabase()
 {
     connection.connect(function(err) 
@@ -15,7 +15,6 @@ function connectDatabase()
         try 
         {
             establishConnection(err) 
-            return connection
         }
         catch
         {
@@ -70,6 +69,4 @@ function createNominationTable()
 module.exports =
 {
     connection
-    //connectDatabase,
-    //closeDatabase
 }
