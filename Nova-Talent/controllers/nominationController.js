@@ -23,18 +23,31 @@ async function addNomination(res, Nomination)
 
 }
 
-async function showNominationList(req , res)
+async function showNominationList(res)
 {
     try
     {
         var nominationList = await NominationModel.getNominationsNonRejected()
         res.writeHead(200 , {'Content-Type': 'application/json'})
-        res.write(JSON.stringify(nominationList));
+        res.write(distinguishEmptyList(nominationList))
         res.end()
     }
     catch (err)
     {
+        //TODO: ESCRIBIR EN EL ARCHIVO DE LOGS
         console.log(err)
+    }
+}
+
+function distinguishEmptyList(nominationList)
+{
+    if (nominationList == [])
+    {
+        return "The list is empty"
+    }
+    else
+    {
+        return JSON.stringify(nominationList)
     }
 }
 

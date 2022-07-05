@@ -25,7 +25,10 @@ function sendMail(userWhoNominate , userToNominate)
     {
         if (err) 
         {
-            console.log(err);
+            if (err.code == 'EENVELOPE')
+            {
+              console.log("An email could not be sent to address writed")
+            }
         } 
         else 
         {
