@@ -1,15 +1,19 @@
 var NominationModel = require('../models/nominationModel')
 
-function addNomination(req, res, Nomination)
+async function addNomination(res, Nomination)
 {
     try
     {
-        console.log(Nomination)
+        await NominationModel.addNominationToDb(Nomination)
+        res.writeHead(201 , {'Content-Type': 'application/json'})
+        res.write("Nomination added successfully");
+        res.end()
     }
     catch (err)
     {
         console.log(err)
     }
+
 }
 
 async function showNominationList(req , res)

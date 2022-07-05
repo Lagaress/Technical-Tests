@@ -27,11 +27,8 @@ function manageURLs(req , res)
         var regularExpresion = /%20/gi
         parserExplanation = explanation.replace(regularExpresion,' ')
         
-        const newNomination = new NominationClass.Nomination(userWhoNominate,userToNominate,explanation,involvement,overall)
-        console.log(newNomination)
-        res.end("Now you can nominate") 
-        
-        //addNomination(req , res, newNomination)
+        const newNomination = new NominationClass.Nomination(userWhoNominate,userToNominate,explanation,involvement,overall)        
+        addNomination(res, newNomination)
     }
 
     else if (req.url.match(/\/nomination-list\/([A-Z])|[a-z]/) && req.method == 'GET')

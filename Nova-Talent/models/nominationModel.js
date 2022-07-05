@@ -1,10 +1,25 @@
 const {connection} = require('../data/database/connection')
+const NominationClass = require('../data/Nomination')
 
 function addNominationToDb(nominationToAdd)
 {
+
+    const userWhoNominate = nominationToAdd.getUserWhoNominate()
+    const userToNominate = nominationToAdd.getemailToNominate()
+    const explanation = nominationToAdd.getExplanation()
+    const involvement = nominationToAdd.getInvolvement()
+    const overall = nominationToAdd.getOverall()
+    const accepted = nominationToAdd.getAccepted()
+
+    var regularExpresion = /%20/gi
+    parserExplanation = explanation.replace(regularExpresion,' ')
+
+    insertQuery = `INSERT INTO nominations (userWhoNominate,email,explanation,involvement,overall,accepted) VALUES ("${userWhoNominate}","${userToNominate}","${parserExplanation}",${involvement},${overall},${accepted})`
+
+    console.log(insertQuery)
+
     return new Promise((resolve , reject) =>
     {
-      // insertQuery = 'INSERT INTO nominations (userWhoNominate,email,explanation,involvement,overall,accepted) VALUES ('nominationToAdd.getUserWhoNominate(),nominationToAdd.getemailToNominate(),nominationToAdd.getExplanation(),nominationToAdd.getInvolvement(),nominationToAdd.getOverall()')'
 
         connection.query(insertQuery, function(err, result)
         {
@@ -12,6 +27,7 @@ function addNominationToDb(nominationToAdd)
             resolve("Nomination added succesfully")
         })
     })
+    
 } 
 
 function getNominationsNonRejected()
