@@ -1,4 +1,5 @@
-const http = require('http')
+const http = require('http');
+const { resourceUsage } = require('process');
 const {addNomination , showNominationList , showInstructions} = require('./controllers/nominationController')
 const server = http.createServer(function(req, res) {
     res.writeHead(200, { "Content-type": "text/plain" })
@@ -17,9 +18,17 @@ function manageURLs(req , res)
         addNomination(req , res)
     }
 
-    else if (req.url == '/nominations-list' && req.method == 'GET')
+    else if (req.url.match(/\/nomination-list\/([admin,user])/) && req.method == 'GET')
     {
-        showNominationList(req , res)
+        const parameter = req.url.split('/')[2]
+        if (parameter == 'admin')
+        {
+            showNominationList(req , res)
+        }
+        else
+        {
+            res.end("You have to be an admin to see nomination list")
+        }
     }
 
     else
