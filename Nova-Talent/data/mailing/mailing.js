@@ -23,18 +23,23 @@ function sendMail(userWhoNominate , userToNominate)
     
     transporter.sendMail(mailOptions, function(err, info)
     {
-        if (err) 
-        {
-            if (err.code == 'EENVELOPE')
-            {
-              console.log("An email could not be sent to address writed")
-            }
-        } 
-        else 
-        {
-            console.log('Email sent: ' + info.response);
-        }
+      distinguishErrorCases(err)
     });
+}
+
+function distinguishErrorCases(err)
+{
+    if (err) 
+    {
+        if (err.code == 'EENVELOPE')
+        {
+          console.log("An email could not be sent to address writed")
+        }
+    } 
+    else 
+    {
+        console.log('Email sent: ' + info.response);
+    }
 }
 
 module.exports =
