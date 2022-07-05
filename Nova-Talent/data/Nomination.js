@@ -1,5 +1,3 @@
-const {sendMail} = require('./mailing/mailing')
-
 class Nomination
 {
 
@@ -46,7 +44,6 @@ class Nomination
     isRejectedAutomatically(overall)
     {
         return (overall >= 8)
-        sendMail(this.getUserWhoNominate() , this.getemailToNominate())
     }
 
 }   

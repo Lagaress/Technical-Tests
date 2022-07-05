@@ -1,5 +1,6 @@
 const {connection, createDatabase, closeDatabase} = require('../data/database/connection')
 const NominationClass = require('../data/Nomination')
+const {sendMail} = require('../data/mailing/mailing')
 
 async function addNominationToDb(nominationToAdd)
 {
@@ -25,7 +26,7 @@ async function addNominationToDb(nominationToAdd)
     else
     {
         insertQuery = `INSERT INTO nominations (userWhoNominate,email,explanation,involvement,overall,accepted) VALUES ("${userWhoNominate}","${userToNominate}","${parserExplanation}",${involvement},${overall},${accepted})`
-    
+        sendMail(userWhoNominate , userToNominate)
         return new Promise((resolve , reject) =>
         {
     
@@ -35,6 +36,7 @@ async function addNominationToDb(nominationToAdd)
                 resolve(true)
             })
         })
+        
     }  
 } 
 

@@ -16,7 +16,7 @@ function sendMail(userWhoNominate , userToNominate)
     var mailOptions = 
     {
       from: mailContent.from,
-      to: `"${userWhoNominate},${userToNominate}"`,
+      to: `${userWhoNominate} , ${userToNominate}`,
       subject: mailContent.subject,
       text: mailContent.text
     };
