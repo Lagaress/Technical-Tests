@@ -1,5 +1,4 @@
-const {connection, createDatabase, closeDatabase} = require('../data/database/connection')
-const NominationClass = require('../data/Nomination')
+const {connection} = require('../data/database/connection')
 const {sendMail} = require('../data/mailing/mailing')
 
 async function addNominationToDb(nominationToAdd)
@@ -18,7 +17,7 @@ async function addNominationToDb(nominationToAdd)
 
     if ( isNominated != 0 )
     {
-        return new Promise((resolve , reject) =>
+        return new Promise((resolve) =>
         {
             resolve(false)
         })
@@ -26,51 +25,48 @@ async function addNominationToDb(nominationToAdd)
     else
     {
         insertQuery = `INSERT INTO nominations (userWhoNominate,email,explanation,involvement,overall,accepted) VALUES ("${userWhoNominate}","${userToNominate}","${parserExplanation}",${involvement},${overall},${accepted})`
-        sendMail(userWhoNominate , userToNominate)
-        return new Promise((resolve , reject) =>
+        return new Promise((resolve) =>
         {
-    
-            connection.query(insertQuery, function(err, result)
+            connection.query(insertQuery, function(err)
             {
                 if (err) throw err 
+                sendMail(userWhoNominate , userToNominate)
                 resolve(true)
             })
         })
-        
     }  
 } 
 
 function isNominatedEmailInBD(userToNominate)
 {
     searchNominatedEmailQuery = `SELECT * from nominations WHERE email ="${userToNominate}" `
-    return new Promise((resolve , reject) =>
+    
+    return new Promise((resolve) =>
     {
-
         connection.query(searchNominatedEmailQuery, function(err, result)
         {
-            if (err) throw err 
-            resolve( result.length )
+            if (err) 
+            {
+                throw err 
+            }
+            resolve(result.length)
         })
     })
-
-
- 
-
 }
 
 function getNominationsNonRejected()
 {
-    
-    return new Promise((resolve , reject) =>
+    return new Promise((resolve) =>
     {
         connection.query("SELECT * from nominations WHERE accepted = 1", function(err, result)
         {
-            if (err) throw err 
+            if (err) 
+            {
+                throw err 
+            }
             resolve(result)
         })
-    })
-
-    
+    })   
 }
 
 module.exports = 

@@ -23,11 +23,11 @@ function sendMail(userWhoNominate , userToNominate)
     
     transporter.sendMail(mailOptions, function(err, info)
     {
-      distinguishErrorCases(err)
+      distinguishErrorCases(err, info)
     });
 }
 
-function distinguishErrorCases(err)
+function distinguishErrorCases(err, info)
 {
     if (err) 
     {
