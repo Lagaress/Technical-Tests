@@ -56,7 +56,7 @@ function distinguishMissingArguments(req, res)
         parserExplanation = explanation.replace(regularExpresion,' ')
         
         const newNomination = new NominationClass.Nomination(userWhoNominate,userToNominate,explanation,involvement,overall)        
-        addNomination(res, newNomination)    
+        addNomination(req, res, newNomination)    
     }
 }
 
@@ -85,7 +85,7 @@ function distinguishAdmin(req, res)
 
     if (parameter == 'admin')
     {
-        showNominationList(res)
+        showNominationList(req, res)
     }
     else
     {

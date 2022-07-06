@@ -25,13 +25,19 @@ async function addNominationToDb(nominationToAdd)
     else
     {
         insertQuery = `INSERT INTO nominations (userWhoNominate,email,explanation,involvement,overall,accepted) VALUES ("${userWhoNominate}","${userToNominate}","${parserExplanation}",${involvement},${overall},${accepted})`
-        return new Promise((resolve) =>
+        return new Promise((resolve, reject) =>
         {
             connection.query(insertQuery, function(err)
             {
-                if (err) throw err 
-                sendMail(userWhoNominate , userToNominate)
-                resolve(true)
+                if (err)
+                {
+                    reject(err)
+                }
+                else
+                {
+                    sendMail(userWhoNominate , userToNominate)
+                    resolve(true)    
+                }
             })
         })
     }  
@@ -41,33 +47,40 @@ function isNominatedEmailInBD(userToNominate)
 {
     searchNominatedEmailQuery = `SELECT * from nominations WHERE email ="${userToNominate}" `
     
-    return new Promise((resolve) =>
+    return new Promise((resolve, reject) =>
     {
         connection.query(searchNominatedEmailQuery, function(err, result)
         {
-            if (err) 
+            if (err)
             {
-                throw err 
+                reject(err)
             }
-            resolve(result.length)
+            else
+            {
+                resolve(result.length)
+            }
         })
     })
 }
 
 function getNominationsNonRejected()
 {
-    return new Promise((resolve) =>
+    return new Promise((resolve, reject) =>
     {
         connection.query("SELECT * from nominations WHERE accepted = 1", function(err, result)
         {
-            if (err) 
+            if (err)
             {
-                throw err 
+                reject(err)
             }
-            resolve(result)
+            else
+            {
+                resolve(result)
+            }
         })
-    })   
+    })       
 }
+
 
 module.exports = 
 {

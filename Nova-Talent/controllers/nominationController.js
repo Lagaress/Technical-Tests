@@ -1,6 +1,7 @@
 const NominationModel = require('../models/nominationModel')
+const {dashLogger} = require('../documentation/logs/logger')
 
-async function addNomination(res, Nomination)
+async function addNomination(req, res, Nomination)
 {
     try
     {
@@ -11,8 +12,7 @@ async function addNomination(res, Nomination)
     }
     catch (err)
     {
-        //TODO: ESCRIBIR EN EL ARCHIVO DE LOGS
-        console.log(err)
+        registerError(req, err)    
     }
 
 }
@@ -29,7 +29,7 @@ function distinguishNominationCases(isAddingNominationPossibly)
     }
 }
 
-async function showNominationList(res)
+async function showNominationList(req, res)
 {
     try
     {
@@ -40,8 +40,7 @@ async function showNominationList(res)
     }
     catch (err)
     {
-        //TODO: ESCRIBIR EN EL ARCHIVO DE LOGS
-        console.log(err)
+       registerError(req, err)
     }
 }
 
@@ -65,6 +64,12 @@ function showInstructions(res)
         "The endpoints of the API are:\n/nominate/{userWhoNominate}/{userToNominate}/{explanation}/{involvement}/{overall}/\n/nomination-list/{user}\nAll parameters are obligatory\nFor more information check API documentation on the documentation folder"
     )
     res.end()
+}
+
+function registerError (req, err)
+{
+    console.log("An error has been produced, more information on /documentation/logs/")
+    dashLogger.error(`Error: ${err} , Request: ${req.url}`)
 }
 
 module.exports = 
