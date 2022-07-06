@@ -61,7 +61,7 @@ function showInstructions(res)
     res.writeHead(200 , {'Content-Type': 'text/plain'})
     res.write
     (
-        "The endpoints of the API are:\n[POST] /nominate/{userWhoNominate}/{userToNominate}/{explanation}/{involvement}/{overall}/\n[GET] /nomination-list/{user}\nAll parameters are obligatory\nFor more information check API documentation on the documentation folder"
+        "The endpoints of the API are:\n[POST] /nominate/{userWhoNominate}/{userToNominate}/{explanation}/{involvement}/{overall}/\n[GET] /nomination-list/{user}/\nAll parameters are obligatory\nFor more information check API documentation on the documentation folder"
     )
     res.end()
 }

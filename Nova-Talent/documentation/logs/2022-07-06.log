@@ -1,3 +1,0 @@
-{"level":"error","message":"Error: ReferenceError: createDatabaseFirsTime is not defined"}
-{"level":"error","message":"Error: TypeError: NominationModel.createDatabaseFirsTime is not a function"}
-{"level":"error","message":"Error: ReferenceError: res is not defined"}

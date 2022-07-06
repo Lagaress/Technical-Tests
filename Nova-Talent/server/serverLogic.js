@@ -3,7 +3,8 @@ const NominationClass = require('../data/Nomination')
 
 function manageURLs(req , res)
 {
-    if (req.url.match(/\/nominate\/[A-Z]|[a-z]|[@.,*`^]\/[A-Z]|[a-z]|[@.,*`^]\/[A-Z]|[a-z]\/[1-10]\/[1-10]/) && req.method == 'POST')
+
+    if (req.url.match(/\/nominate\/[A-Z]|[a-z]|[@.,*`^]\/[A-Z]|[a-z]|[@.,*`^]\/[A-Z]|[a-z]\/[1-10]\/[1-10]/) && req.method == 'POST')    
     {
         nominateEndpoint(req, res)
     }

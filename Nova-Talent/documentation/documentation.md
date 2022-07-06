@@ -117,7 +117,6 @@ By default the values of this fields are:
 * host: localhost. 
 * user: localhost. 
 * password: root.
-* database: nova.
 * port: 3306.
 
 The route of the config file for the database is:
@@ -130,7 +129,6 @@ An example of this file could be seen below
     "host": "localhost",
     "user": "localhost",
     "password": "root",
-    "database": "nova",
     "port": 3306
 }
 ```
