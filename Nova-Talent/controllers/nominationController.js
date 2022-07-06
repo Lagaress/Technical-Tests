@@ -57,9 +57,14 @@ function distinguishEmptyListCases(nominationList)
     }
 }
 
-function showInstructions(req, res)
+function showInstructions(res)
 {
-    //TOO - DO
+    res.writeHead(200 , {'Content-Type': 'text/plain'})
+    res.write
+    (
+        "The endpoints of the API are:\n/nominate/{userWhoNominate}/{userToNominate}/{explanation}/{involvement}/{overall}/\n/nomination-list/{user}\nAll parameters are obligatory\nFor more information check API documentation on the documentation folder"
+    )
+    res.end()
 }
 
 module.exports = 

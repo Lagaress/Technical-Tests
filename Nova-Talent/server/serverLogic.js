@@ -15,8 +15,7 @@ function manageURLs(req , res)
 
     else
     {
-        res.end("API instructions") 
-        showInstructions(req , res)
+        showInstructions(res)
     }
 }
 
@@ -31,7 +30,7 @@ function nominateEndpoint(req, res)
 
     else
     {
-        res.end("API Instrucciont 2")
+        showInstructions(res)
     }
 }
 
@@ -76,7 +75,7 @@ function nominationListEndpoint(req,res)
     }
     else
     {
-        res.end("API Instrucciont 2")
+        showInstructions(res)
     }
 }
 
