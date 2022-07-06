@@ -4,18 +4,18 @@ Nova Nomination API is a REST API coded in vanilla NodeJS (no express, no NetJS.
 
 You can use the Nova Nomination API in dev mode too, which will cause the auomatic restart of the server if any change in the code.
 
+All errors are saved in logs inside /documentation/logs/.
+
 ## **Table of Contents**
-- [Nova Nomination API](#nova-nomination-api)
-  - [**Table of Contents**](#table-of-contents)
-  - [**User Mode**](#user-mode)
-    - [**Nominate**](#nominate)
-    - [**Nomination-List**](#nomination-list)
-    - [**API-Instructions**](#api-instructions)
-  - [**Dev Mode**](#dev-mode)
-    - [**Configuration**](#configuration)
-      - [**Server**](#server)
-      - [**Database**](#database)
-      - [**Mailing**](#mailing)
+- [**User Mode**](#user-mode)
+  - [**Nominate**](#nominate)
+  - [**Nomination-List**](#nomination-list)
+  - [**API-Instructions**](#api-instructions)
+- [**Dev Mode**](#dev-mode)
+  - [**Configuration**](#configuration)
+    - [**Server**](#server)
+    - [**Database**](#database)
+    - [**Mailing**](#mailing)
 
 <br>
 
@@ -111,12 +111,13 @@ An example of this file could be seen below
 <br>
 
 #### **Database**
-You can configure the host, user, password, and the port that you will be using. 
+You can configure the host, user, password, and the port, and the name of database that you will be using. 
 
 By default the values of this fields are:
 * host: localhost. 
 * user: localhost. 
 * password: root.
+* database: nova.
 * port: 3306.
 
 The route of the config file for the database is:
@@ -129,6 +130,7 @@ An example of this file could be seen below
     "host": "localhost",
     "user": "localhost",
     "password": "root",
+    "database": "nova",
     "port": 3306
 }
 ```
