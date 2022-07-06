@@ -35,13 +35,21 @@ async function addNominationToDb(nominationToAdd)
                 }
                 else
                 {
-                    sendMail(userWhoNominate , userToNominate)
+                    sendEmailIfItsNecessary([userWhoNominate,userToNominate] , accepted)
                     resolve(true)    
                 }
             })
         })
     }  
 } 
+
+function sendEmailIfItsNecessary(arrayEmails , accepted)
+{
+    if (accepted == false)
+    {
+        sendMail(arrayEmails[0] , arrayEmails[1])
+    }
+}
 
 function isNominatedEmailInBD(userToNominate)
 {
@@ -81,9 +89,50 @@ function getNominationsNonRejected()
     })       
 }
 
+function createDatabaseIfNotExist()
+{
+    connection.query("use nova" , function(err)
+    {
+        if (err)
+        {
+            createDataseFirstTime()        
+            console.log("Database ready to use") 
+        }
+    }) 
+}
+
+function createDataseFirstTime()
+{
+    createNovaDatabase()
+    connection.query("use nova") 
+    createNominationTable() 
+}
+
+function createNovaDatabase()
+{
+    connection.query("CREATE DATABASE IF NOT EXISTS nova" , function(err)
+    {
+        if (err) 
+        {
+            throw err
+        }     
+    }) 
+}
+
+function createNominationTable()
+{
+    var createNominationTable = "CREATE TABLE IF NOT EXISTS nominations (id INT AUTO_INCREMENT PRIMARY KEY, userWhoNominate VARCHAR(50),  email VARCHAR(50), explanation VARCHAR(255), involvement INT, overall INT, accepted BOOL)";
+    connection.query(createNominationTable, function (err) {
+        if (err) 
+        {
+            throw err
+        }
+    })
+}
 
 module.exports = 
 {
     addNominationToDb,
-    getNominationsNonRejected
+    getNominationsNonRejected,
+    createDatabaseIfNotExist
 }
