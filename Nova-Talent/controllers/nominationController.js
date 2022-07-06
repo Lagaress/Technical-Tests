@@ -72,9 +72,24 @@ function registerError (req, err)
     dashLogger.error(`Error: ${err} , Request: ${req.url}`)
 }
 
+function createDatabase()
+{
+    try
+    {
+        NominationModel.createDatabaseIfNotExist()
+    }
+    catch (err)
+    {
+        console.log("An error has been produced creating database, more information on /documentation/logs/")
+        dashLogger.error(`Error: ${err}`)  
+    }
+}
+
 module.exports = 
 {
     addNomination,
     showNominationList,
-    showInstructions
+    showInstructions,
+    createDatabase
+    
 }

@@ -1,4 +1,4 @@
-const {addNomination , showNominationList , showInstructions} = require('../controllers/nominationController')
+const {addNomination , showNominationList , showInstructions, createDatabase} = require('../controllers/nominationController')
 const NominationClass = require('../data/Nomination')
 
 function manageURLs(req , res)
@@ -93,7 +93,13 @@ function distinguishAdmin(req, res)
     }
 }
 
+function startDatabase()
+{
+    createDatabase()
+}
+
 module.exports = 
 {
-    manageURLs
+    manageURLs,
+    startDatabase
 }
