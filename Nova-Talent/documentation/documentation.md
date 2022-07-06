@@ -5,15 +5,17 @@ Nova Nomination API is a REST API coded in vanilla NodeJS (no express, no NetJS.
 You can use the Nova Nomination API in dev mode too, which will cause the auomatic restart of the server if any change in the code.
 
 ## **Table of Contents**
-- [**User Mode**](#user-mode)
-  - [Nominate](#nominate)
-  - [Nomination-List](#nomination-list)
-  - [API-Instructions](#api-instructions)
-- [**Dev Mode**](#dev-mode)
-  - [Configuration](#configuration)
-    - [Server](#server)
-    - [Database](#database)
-    - [Mailing](#mailing)
+- [Nova Nomination API](#nova-nomination-api)
+  - [**Table of Contents**](#table-of-contents)
+  - [**User Mode**](#user-mode)
+    - [**Nominate**](#nominate)
+    - [**Nomination-List**](#nomination-list)
+    - [**API-Instructions**](#api-instructions)
+  - [**Dev Mode**](#dev-mode)
+    - [**Configuration**](#configuration)
+      - [**Server**](#server)
+      - [**Database**](#database)
+      - [**Mailing**](#mailing)
 
 <br>
 
@@ -34,9 +36,9 @@ Or API-Instructions by default.
 ### **Nominate**
 
 The endpoint is: 
-`/nominate/{userWhoNominate}/{userToNominate}/{explanation}/{involvement}/{overall}/`
+`[POST] /nominate/{userWhoNominate}/{userToNominate}/{explanation}/{involvement}/{overall}/`
 
-This endpoint is to nominate a new user to Nova. If the nominated user is automatically rejected, an email is sent to userWhoNominate and userToNominate. 
+This endpoint is to nominate a new user to Nova. If the nominated user is automatically rejected, an email is sent to userWhoNominate and userToNominate. It only works with POST method.
 
 Parameters: 
 * **userWhoNominate**. Email of the person that is nominating (your current email). Obligatory parameter (string). 
@@ -55,9 +57,9 @@ The endpoint will add the new nomination to the database. The response will be a
 ### **Nomination-List**
 
 The endpoint is:
-`/nomination-list/{user}`
+`[GET] /nomination-list/{user}`
 
-This endpoint is to get a list (JSON) of non-rejected nominations. This only can be done by an admin.
+This endpoint is to get a list (JSON) of non-rejected nominations. This only can be done by an admin. It only works with GET method.
 
 Parameters: 
 * **user**. Type of the user who wants to obtain nomination list. For a success response, it has to be an admin user. Obligatory parameter (string). 
