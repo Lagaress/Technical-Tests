@@ -4,5 +4,4 @@
     "password": "root",
     "database": "nova",
     "port": 3306
- 
 }
